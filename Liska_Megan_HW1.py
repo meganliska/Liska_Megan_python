@@ -102,7 +102,7 @@ def decoder(text):
     text- a string of characters either in English or already encoded
     
     Results:
-    a string either of encoded English or decoded ROT 13
+    A string either of encoded English or decoded ROT 13
     
     ml2016
     """
@@ -290,12 +290,16 @@ def max_in_list(numbers):
     ml2016
     """    
     #reduce has two arguments, function and a variable, in our case a list
+    #reduce has two arguments, function and a variable, in our case a list, and
+    #returns a single argument
     #for the function argument write a lambda function that finds the max number 
     #second argument is the numbers that we have inputted
+    #second argument is the numbers in our list
     
-    result = reduce(lambda x, y: x if x > y else y, numbers )
+    result = reduce(lambda x, y: x if x > y else y, numbers ) 
+    #applies our function, which gives the max number, to our list
     
-    return result
+    return result #return our result 
 
 print(max_in_list([1, 50, 150, 27]))#test case
     
@@ -318,34 +322,38 @@ def listlength(word):
     """
     result = [] #sets result as an empty list
     for x in word: 
-        #loops through our blank and  
-        l = len(x) #new variable l is the length of variable x
+        #loops through our list of words  
+        l = len(x) #new variable l is the length of each word x
         result.append(l) #result.append adds l to our result list
     return result
 
 print(listlength(['The', 'class', 'teaches', 'us', 'python'])) #test case
 
-def listlength(word):
+def listlength(wordlist):
     """
     The function listlength(word) takes a list of words and maps it to
     a list of integers representing the lengths of the corresponding 
     words using the map function
-    Parameters:
+    
+    Parameters: 
+    wordlist - a list of words
     
     Results:
+    
     
     ml2016
     """
     #use the map function to apply the length function to each word in the 
     #parameters
     #return a result as a list of these lengths
-    return list(map(len,word))
+    return list(map(len,wordlist)) #maps the words to their length
 
 print(listlength(['The', 'class', 'teaches', 'us', 'python'])) #test case   
     
 def listlength(word):
     """
-    The function listlength() takes a blank and does blank using 
+    The function listlength() takes a list of words and maps it to a list of 
+    integers representing the lengths of the corresponding words using
     list comprehensions
     
     Parameters:
@@ -441,15 +449,15 @@ print(translatemap(['merry', 'christmas', 'and', 'happy', 'new', 'year']))
 
 
 #Problem 12: Implement the higher order functions map, filter and reduce
-def ourmap(func, word):
+def ourmap(func, it):
     """
     The function ourmap(func, word) implements the map function
     Parameters:
     func - a function we apply to our element
-    word - a string
+    it - an iterable, namely a list of either numbers or strings
     
     Result:
-    
+    A list 
     
     ml2016
     """
@@ -458,10 +466,12 @@ def ourmap(func, word):
     #we will apply our function func() to each x in our second parameter, word
     
     result = [] #sets our result as an empty list intially
-    for x in word:
+    for x in it:
         newelm = func(x) #set a new element as our function func() acting on x
         result.append(newelm) #add newelm or func(x) to our list
     return result #return our resultant list
+
+print(ourmap(lambda x: x-1, [6, 7, 7, 44, 21])) #test case
 
 def ourfilter(func, iterable):
     """
@@ -470,7 +480,9 @@ def ourfilter(func, iterable):
     func - a function we apply to our element
     iterable - a string, or list
     
-    Result- 
+    Result
+    Returns a list where the items in the list where the ones that met the
+    requirement of our function
     
     ml2016
     """
@@ -482,22 +494,25 @@ def ourfilter(func, iterable):
             result.append(x) #add x to our list
     return result #return our resultant list
 
-print
+print(ourfilter(lambda x: x > 2, [0, 3, 1, 30, 4])) #test case
     
 def ourreduce(func, it):
     """
     The function ourreduce(func, word) implements the reduce function
     Parameters:
     func - a function we apply to our element
-    it - a string, or list or iterable of some sort
+    it - a list or iterable of some sort
     
-    Result- 
+    Result:
+    One element which met the requirements of the function in the first 
+    argument
     
     ml2016
     """
     result = it[0] #sets our result as the first element in our iterator 
     for x in it[1:]: 
         #iterates through x starting with the blank position
-        result = func(result, x) #makes our result the blank
+        result = func(result, x) #makes our result the function applied to x
     return result
+print(ourreduce(min,[1, 20, -4, 111, 67]))#test case
         
