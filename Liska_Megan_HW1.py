@@ -13,16 +13,17 @@ def translate(words):
     """
     
     This function translate() will 
-    translate the English words we input into Swedish
+    translate the English words we input into their Swedish counterpart
     For example translate('merry') will return 'god'
     
     Parameters:
-    words- An English word, or words from our dictionary
+    words - An English word, or words, from our dictionary
+    The words can either be in a string or in a list
     
     Returns: 
     The corresponding Swedish word from our dictionary
-    If word inputted in function is not in the dictionary function returns
-    original word
+    If the word inputted in the function is not in the dictionary translate() 
+    returns the original word
     
     ml2016
     
@@ -31,17 +32,31 @@ def translate(words):
              "new": "nytt", "year": "ar"}  #define our dictionary using the 
                                            #words given in the problem.   
     result = '' #sets our result as an empty string the function will fill.
-
+    
+    if type(words) == str: #this takes care of the case the English words
+                           #we input into the function is a string
+        words = words.split() #this splits the string into the individual words
+        
+    
+    elif type(words) == list : #this is the case where words is a list
+        pass #we don't need to split a list so we keep the list as is 
+    
     for char in words: #loops through the words we input
-        swedish = dict2.get(char, char) #searches through dictionary and
+        swedish = dict2.get(char, char) #.get searches through dict2 and gives  
+                                        #the value of char if char is in the 
+                                        #dictionary and simply returns the 
+                                        #original char if it is not.
 
 
 
-        result += swedish #sets results as blank plus swedish 
+        result += ' ' + swedish #sets results as the swedish word and adds 
+                                #spaces between our words
     
         
     return result
-print(translate('merry christmas and happy new year')) #test case       
+print(translate('merry christmas and happy new year'))
+print(translate(['merry', 'christmas', 'and', 'happy', 'new', 'year']))
+#test case       
         
 #Problem 2: Write a function char_freq that takes a string and builds a 
 #frequency list of the characters contained in it.
@@ -53,7 +68,7 @@ def char_freq(text):
     list of the characters contained in it
     
     Parameters:
-    text- a string of characters 
+    text - a string of characters 
     
     Results:
     A Python dictionary listing the frequencies of each character
@@ -61,11 +76,17 @@ def char_freq(text):
     ml2016
     """
     #Can once again use the .get function
+    #This time .get(x,0) will look through the dictionary for x and return 
+    #0 if x is not found. 
+    #Then add 1 so it will put a 1 in our result dictionary if x is found
     result = {} #sets our result as an dictionary that the function will fill.
     
     for char in text: 
-    #loop will iterate through each character in our text
-        result[char] = result.get(char, 0) + 1 #sets result as  
+    #iterate through each character in our text
+        result[char] = result.get(char, 0) + 1 #uses the .get function to count
+                                               #the number of times 
+                                               #char appears in the input text
+
         
     return result
 print(char_freq('abbabcbdbabdbdbabababcbcbab')) #test case
@@ -100,9 +121,10 @@ def decoder(text):
 
     result = ''  #sets result as empty string the function will fill
 
-    for char in text:  #iterate through the text we input
-        new = key.get(char, char) #sets new variable as the 
-        result += new #sets our result as the new character
+    for char in text:  #iterate through the characters in input text
+        new = key.get(char, char) #uses .get to match our input character with
+                                  #its match in our dictionary
+        result += new #sets our result as the corresponding character
         
     return result
 print(decoder('Pnrfne pvcure? V zhpu cersre Pnrfne fnynq!'))#test case 
@@ -112,15 +134,14 @@ print(decoder('Pnrfne pvcure? V zhpu cersre Pnrfne fnynq!'))#test case
 #1 Compresses two of more occurences of the space character into one
 #2 Inserts an extra space after a period if the period is directly followed by 
 #a letter.
-#As stated in the tip, we will complete this problem using regular expressions,
-#namely the function re.sub
+
 
 
 import re #imports our regular expression functions including re.sub
 def correct(InputString):  
     """
-    The function correct(InputString) takes a string and does two things
-    1:Compresses two or more occurences of the space character
+    The function correct(InputString) takes a string and does two things:
+    1: Compresses two or more occurences of the space character
     into one.
     2: Inserts an extra space after a period if the period is directly 
     followed by a letter.
@@ -132,8 +153,10 @@ def correct(InputString):
     The corrected string of characters or words
     ml2016
     """
+    #Use the tip and use regular expressions, specifically re.sub
     NewString= re.sub('\s+',' ',InputString) #substitute any instance of one 
                                              #or more spaces with just one space
+                                            #thus removing extra spaces
     
     NewString= re.sub('\.','. ',NewString) #substitute a period in Input string 
                                           #with a period and a space after it,
@@ -149,10 +172,9 @@ correct(InputString) #This tests the example given in the question.
 def make_3sg_form(words):
     """
    The function make_3sg_form() takes a verb in infinite 
-   form returns its third person singular form.
-   our function will be a series of if else statements that run through the
-   three (or more) statements that we are given/really they are more like rules
-   and provide a different return for each grammar situation. 
+   form and returns its third person singular form.
+   It evaluates the verb based off a set of grammatical rules for conjugation
+
    
    Parameters:
    words- an English verb in infinite form
@@ -190,8 +212,7 @@ def make_3sg_form(words):
         return words + 'es' #This is the same as the case above.    
     else: 
         return words + 's' #final case, if the word ends in any other letter 
-                           #than the ones specified
-                           #our function will return the original word 
+                           #than the ones specified return the original word 
                            #with s added on to the end. 
 print(make_3sg_form('try'))
 print(make_3sg_form('brush'))
@@ -200,7 +221,7 @@ print(make_3sg_form('fix'))#test cases
         
 
 #Problem 6:
-Con = 'bcdfghjklmnpqrstvwxyz' #lists all consanants as one variable to simplify
+Con = 'bcdfghjklmnpqrstvwxyz' #lists all consonants as one variable to simplify
 Vowel = 'aeiou' #lists all vowels as one variable to simplify case 3
 
 def make_ing_form(word):
@@ -230,20 +251,21 @@ def make_ing_form(word):
         return word[0:-2] + 'ying'    
     
     elif word.endswith('e'): #if word ends in e return word with e removed and
-                             #ing added to the end, note this have to come after
-                            #the case of excpections since those end in e
+                             #ing added to the end, 
+                             #note this have to come after
+                             #the case of excpections since those end in e
         return word[0:-1] + 'ing'
         
    
     elif word[-3] in Con and word[-2] in Vowel and word[-1] in Con: 
                                         
-       return word + word[-1] + 'ing' #if word ends in consanent vowel con
+       return word + word[-1] + 'ing' #if word ends in consonent vowel con
                                        #return word with last letter 
                                       #doubled and ing added
        
     else:
         return word + 'ing' #most general case. If word doesn't match any of 
-                            #the aove cases return word with ing added
+                            #the above cases return word with ing added
 print(make_ing_form('see'))
 print(make_ing_form('lie'))
 print(make_ing_form('move'))
@@ -267,11 +289,11 @@ def max_in_list(numbers):
    
     ml2016
     """    
-    #reduce has two arguments and function and a variable, in our case a list
+    #reduce has two arguments, function and a variable, in our case a list
     #for the function argument write a lambda function that finds the max number 
     #second argument is the numbers that we have inputted
     
-    result = reduce(lambda x,y: x if x > y else y, numbers )
+    result = reduce(lambda x, y: x if x > y else y, numbers )
     
     return result
 
@@ -373,12 +395,19 @@ def filter_long_words(wordlist, n):
     
     ml2016
     """
-    #filter function does blank
-    #filter has two arguments a function and a blank
+    #filter function has two arguments a function and a list
+    #filter function takes a list and returns a new list where the new list
+    #is made of elements in the original list for which the function in the 
+    #first argument of filter was true
     
-    return list(filter(lambda x: len(x) > n, wordlist))
+    
+    return list(filter(lambda x: len(x) > n, wordlist)) #returns a list made up
+                                                        #of the elements in 
+                                                        #wordlist for which 
+                                                        #len(x) > n
     
 print(filter_long_words(['the','runner','finished', 'in', 'second','place'], 4))
+#test case
 
 #Problem 11: Solve problem 1 again except this time use the map function
 #This time, as speicified in the problem we use the map function
@@ -404,10 +433,10 @@ def translatemap(words):
                                         #swedish words
 
     result = map(lambda x: dict2[x], words) #applies the lambda function to
-                                            #the words put into the function
+                                            #each word in the list we input
    
-    return list(result) #return result, we have to return it using list 
-                        #because we want blank
+    return list(result) #return result as a list 
+
 print(translatemap(['merry', 'christmas', 'and', 'happy', 'new', 'year']))
 
 
@@ -419,7 +448,8 @@ def ourmap(func, word):
     func - a function we apply to our element
     word - a string
     
-    Result- 
+    Result:
+    
     
     ml2016
     """
@@ -427,42 +457,47 @@ def ourmap(func, word):
     #for loop to implement map
     #we will apply our function func() to each x in our second parameter, word
     
-    result = []
+    result = [] #sets our result as an empty list intially
     for x in word:
-        newelm = func(x)
-        result.append(newelm)
-    return result
+        newelm = func(x) #set a new element as our function func() acting on x
+        result.append(newelm) #add newelm or func(x) to our list
+    return result #return our resultant list
 
-def ourfilter(func, word):
+def ourfilter(func, iterable):
     """
-    The function ourfilter(func, word) implements the filter function
+    The function ourfilter(func, iterable) implements the filter function
     Parameters:
     func - a function we apply to our element
-    word - a string
+    iterable - a string, or list
     
     Result- 
     
     ml2016
     """
-    result = []
-    for x in word:
-        if func(x) == True:
-            result.append(x)
-    return result
+    #use an approach similar to the one used for implementing the map function
+    #since filter returns a list 
+    result = [] #sets our result as an empty list intially
+    for x in iterable:
+        if func(x) == True: #if our function is True (ask)
+            result.append(x) #add x to our list
+    return result #return our resultant list
+
+print
     
-def ourreduce(func, word):
+def ourreduce(func, it):
     """
     The function ourreduce(func, word) implements the reduce function
     Parameters:
     func - a function we apply to our element
-    word - a string
+    it - a string, or list or iterable of some sort
     
     Result- 
     
     ml2016
     """
-    result = word[0]
-    for x in word[1:]:
-        result = func(result, x)
+    result = it[0] #sets our result as the first element in our iterator 
+    for x in it[1:]: 
+        #iterates through x starting with the blank position
+        result = func(result, x) #makes our result the blank
     return result
         
