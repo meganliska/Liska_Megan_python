@@ -289,11 +289,9 @@ def max_in_list(numbers):
    
     ml2016
     """    
-    #reduce has two arguments, function and a variable, in our case a list
     #reduce has two arguments, function and a variable, in our case a list, and
     #returns a single argument
     #for the function argument write a lambda function that finds the max number 
-    #second argument is the numbers that we have inputted
     #second argument is the numbers in our list
     
     result = reduce(lambda x, y: x if x > y else y, numbers ) 
