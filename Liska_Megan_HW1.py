@@ -196,7 +196,7 @@ def make_3sg_form(words):
 print(make_3sg_form('try'))
 print(make_3sg_form('brush'))
 print(make_3sg_form('run'))
-print(make_3sg_form('fix'))
+print(make_3sg_form('fix'))#test cases
         
 
 #Problem 6:
@@ -275,7 +275,7 @@ def max_in_list(numbers):
     
     return result
 
-print(max_in_list([1, 50, 150, 27]))
+print(max_in_list([1, 50, 150, 27]))#test case
     
     
 #Problem 8: Write a function that blanks in three ways
@@ -359,7 +359,7 @@ def find_longest_word(words):
     #finally use max function to find biggest length 
    
     return max(map(len, words))
-print(find_longest_word(['the', 'runner','came','in', 'eleventh']))
+print(find_longest_word(['the', 'runner','came','in', 'eleventh']))#test case
     
 #Problem 10: 
 def filter_long_words(wordlist, n):
@@ -378,6 +378,7 @@ def filter_long_words(wordlist, n):
     
     return list(filter(lambda x: len(x) > n, wordlist))
     
+print(filter_long_words(['the','runner','finished', 'in', 'second','place'], 4))
 
 #Problem 11: Solve problem 1 again except this time use the map function
 #This time, as speicified in the problem we use the map function
@@ -389,7 +390,8 @@ def translatemap(words):
     of English words and translate them to Swedish words.
     
     Paramters:
-    words - English words contained in our dictionary
+    words - English words contained in our dictionary, words must be
+    inputted in the function as a list
     
     Results:
     The Swedish word corresponding to the English word in our dictionary
@@ -406,7 +408,7 @@ def translatemap(words):
    
     return list(result) #return result, we have to return it using list 
                         #because we want blank
-print(translatemap('merry christmas and happy new year'))
+print(translatemap(['merry', 'christmas', 'and', 'happy', 'new', 'year']))
 
 
 #Problem 12: Implement the higher order functions map, filter and reduce
