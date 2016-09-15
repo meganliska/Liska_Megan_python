@@ -13,7 +13,7 @@ def translate(words):
     """
     
     This function translate() will 
-    translate the English words we input into their Swedish counterpart
+    translate the English words we input into their Swedish counterparts
     For example translate('merry') will return 'god'
     
     Parameters:
@@ -33,7 +33,7 @@ def translate(words):
                                            #words given in the problem.   
     result = '' #sets our result as an empty string the function will fill.
     
-    if type(words) == str: #this takes care of the case the English words
+    if type(words) == str: #this takes care of the case where the English
                            #we input into the function is a string
         words = words.split() #this splits the string into the individual words
         
@@ -50,7 +50,7 @@ def translate(words):
 
 
         result += ' ' + swedish #sets results as the swedish word and adds 
-                                #spaces between our words
+                                #spaces between the words
     
         
     return result
@@ -79,7 +79,8 @@ def char_freq(text):
     #This time .get(x,0) will look through the dictionary for x and return 
     #0 if x is not found. 
     #Then add 1 so it will put a 1 in our result dictionary if x is found
-    result = {} #sets our result as an dictionary that the function will fill.
+    result = {} #sets our result as an empty dictionary.
+                #the function will fill
     
     for char in text: 
     #iterate through each character in our text
@@ -96,10 +97,10 @@ print(char_freq('abbabcbdbabdbdbabababcbcbab')) #test case
 def decoder(text):
     """
     The function decoder(text) takes an English word or sentence and encodes it
-    using ROT 13. It can also decode ROT 13 back in regular English
+    using ROT 13. It can also decode ROT 13 back into regular English
     
     Parameters:
-    text- a string of characters either in English or already encoded
+    text - a string of characters either in English or already encoded
     
     Results:
     A string either of encoded English or decoded ROT 13
@@ -151,6 +152,7 @@ def correct(InputString):
     
     Results:
     The corrected string of characters or words
+    
     ml2016
     """
     #Use the tip and use regular expressions, specifically re.sub
@@ -158,9 +160,9 @@ def correct(InputString):
                                              #or more spaces with just one space
                                             #thus removing extra spaces
     
-    NewString= re.sub('\.','. ',NewString) #substitute a period in Input string 
+    NewString= re.sub('\.','. ',NewString) #substitute a period in Inputstring 
                                           #with a period and a space after it,
-                                    #effectiely adding a space after the period
+                                    #thus adding a space after the period
     
     return NewString #returns our result 
 
@@ -173,21 +175,22 @@ def make_3sg_form(words):
     """
    The function make_3sg_form() takes a verb in infinite 
    form and returns its third person singular form.
-   It evaluates the verb based off a set of grammatical rules for conjugation
+   It evaluates the verb based off a set of rules for verb conjugation
 
    
    Parameters:
-   words- an English verb in infinite form
+   words - an English verb in infinite form
    
    Results:
    An English verb in third person singular form
+   
    ml2016
    """
    #use the .endswith('x) function which returns true if our input string ends
    #with x and false otherwise
    #use the .endswith function in conjunction with a series of if/else 
    #statements to test our grammar rules
-   #remember to make the/if else statements from most speicific to most general
+   #remember to make the/if else statements from most specific to most general
 
 
     if words.endswith('y'):
@@ -230,7 +233,7 @@ def make_ing_form(word):
      form and returns its present participle form.
      
      Parameters:
-     word- an English verb in infinite form
+     word - an English verb in infinite form
      
      Results:
      An English word in present participle form
@@ -252,8 +255,8 @@ def make_ing_form(word):
     
     elif word.endswith('e'): #if word ends in e return word with e removed and
                              #ing added to the end, 
-                             #note this have to come after
-                             #the case of excpections since those end in e
+                             #note this has to come after
+                             #the case of exceptions since those end in e
         return word[0:-1] + 'ing'
         
    
@@ -272,7 +275,7 @@ print(make_ing_form('move'))
 print(make_ing_form('hug')) #test cases
 
 #Problem 7: 
-from functools import reduce #imports reduce funtion since it is not in 
+from functools import reduce #imports reduce function since it is not in 
                              #Python 3.5
 def max_in_list(numbers):
     """
@@ -280,7 +283,7 @@ def max_in_list(numbers):
     take a list a numbers and return the largest one.
     
     Parameters:
-    numbers- a list of numbers
+    numbers - a list of numbers
     
     Results:
     A number, namely the largest number in our list
@@ -302,19 +305,19 @@ def max_in_list(numbers):
 print(max_in_list([1, 50, 150, 27]))#test case
     
     
-#Problem 8: Write a function that blanks in three ways
-#Using a for loop
-#Using the map function
-#Using list comprehensions
+#Problem 8: 
 
 def listlength(word):
     """
     The function listlength(word) takes a list of words and maps it to
     a list of integers representing the lengths of the corresponding 
     words using a for loop.
+    
     Parameters:
+    word - a list of words
     
     Results:
+    Returns a list of integers where each integer is a word length
     
     ml2016
     """
@@ -337,6 +340,7 @@ def listlength(wordlist):
     wordlist - a list of words
     
     Results:
+    Returns a list of numbers where each number is a word length
     
     
     ml2016
@@ -344,7 +348,7 @@ def listlength(wordlist):
     #use the map function to apply the length function to each word in the 
     #parameters
     #return a result as a list of these lengths
-    return list(map(len,wordlist)) #maps the words to their length
+    return list(map(len, wordlist)) #maps the words to their length
 
 print(listlength(['The', 'class', 'teaches', 'us', 'python'])) #test case   
     
@@ -355,15 +359,18 @@ def listlength(word):
     list comprehensions
     
     Parameters:
+    word - a list of words
     
     Results:
+    Returns a list of numbers where each number is a word length
     
     ml2016
     """
-    #Use list comprehensions to apply the length function len() to each
-    #list comprehension uses square brackets and a for statement inside(?)
-    #x, or word, in our list of words
-    length = [len(x) for x in word]
+    #Use list comprehensions to apply the length function len() to each word
+    #in our list
+    #list comprehension uses square brackets
+    
+    length = [len(x) for x in word] #applies len() to each x in our list
     return length
 
 print(listlength(['The', 'class', 'teaches', 'us', 'python'])) #test case
@@ -371,33 +378,40 @@ print(listlength(['The', 'class', 'teaches', 'us', 'python'])) #test case
     
 #Problem 9: 
 
-
+from functools import reduce 
 def find_longest_word(words):
     """
-    Write a function find_longest_word that takes a list of words
+    The function find_longest_word() takes a list of words
     and returns the length of the longest one
     Parameters:
+    words - a list of words
     
     Results:
+    A number which is the length of the longest word in our list
     
     ml2016
     """
+    #Only use higher order functions
     #First use the length function to find the length of each word
     #then use map to apply len() to each word in our list
-    #finally use max function to find biggest length 
+    #finally use reduce function to find biggest length 
    
-    return max(map(len, words))
+    return reduce(max, (map(len, words)))
 print(find_longest_word(['the', 'runner','came','in', 'eleventh']))#test case
     
 #Problem 10: 
 def filter_long_words(wordlist, n):
     """
-    Use the higher order function filter to define a function that
-    takes a list of words and an integer n and returns the list of words
+    The function filter_long_words() uses the higher order function filter to 
+    take a list of words and an integer n and return the list of words
     that are longer than n. 
     
-    We define our function and indicate
-    that it will have two inputs, our string of words and integer n
+    Parameters:
+    wordlist - a list of words
+    n - an integer
+    
+    Results:
+    Returns a list where all the words have length greater than n
     
     ml2016
     """
@@ -421,8 +435,8 @@ print(filter_long_words(['the','runner','finished', 'in', 'second','place'], 4))
 
 def translatemap(words):
     """
-    The function translatemap uses the higher order function map to take a list
-    of English words and translate them to Swedish words.
+    The function translatemap() uses the higher order function map to 
+    take a list of English words and translate them to Swedish words.
     
     Paramters:
     words - English words contained in our dictionary, words must be
@@ -447,10 +461,12 @@ print(translatemap(['merry', 'christmas', 'and', 'happy', 'new', 'year']))
 
 
 #Problem 12: Implement the higher order functions map, filter and reduce
+
 def ourmap(func, it):
     """
     The function ourmap(func, word) implements the map function
     Parameters:
+    
     func - a function we apply to our element
     it - an iterable, namely a list of either numbers or strings
     
@@ -464,7 +480,7 @@ def ourmap(func, it):
     #we will apply our function func() to each x in our second parameter, word
     
     result = [] #sets our result as an empty list intially
-    for x in it:
+    for x in it: #iterate through it
         newelm = func(x) #set a new element as our function func() acting on x
         result.append(newelm) #add newelm or func(x) to our list
     return result #return our resultant list
@@ -474,6 +490,7 @@ print(ourmap(lambda x: x-1, [6, 7, 7, 44, 21])) #test case
 def ourfilter(func, iterable):
     """
     The function ourfilter(func, iterable) implements the filter function
+    
     Parameters:
     func - a function we apply to our element
     iterable - a string, or list
@@ -487,8 +504,8 @@ def ourfilter(func, iterable):
     #use an approach similar to the one used for implementing the map function
     #since filter returns a list 
     result = [] #sets our result as an empty list intially
-    for x in iterable:
-        if func(x) == True: #if our function is True (ask)
+    for x in iterable: #iterate through x
+        if func(x) == True: #if our function is True
             result.append(x) #add x to our list
     return result #return our resultant list
 
@@ -497,9 +514,10 @@ print(ourfilter(lambda x: x > 2, [0, 3, 1, 30, 4])) #test case
 def ourreduce(func, it):
     """
     The function ourreduce(func, word) implements the reduce function
+    
     Parameters:
     func - a function we apply to our element
-    it - a list or iterable of some sort
+    it - a list or iterable
     
     Result:
     One element which met the requirements of the function in the first 
@@ -509,7 +527,7 @@ def ourreduce(func, it):
     """
     result = it[0] #sets our result as the first element in our iterator 
     for x in it[1:]: 
-        #iterates through x starting with the blank position
+        #iterates through x starting with the second position
         result = func(result, x) #makes our result the function applied to x
     return result
 print(ourreduce(min,[1, 20, -4, 111, 67]))#test case
