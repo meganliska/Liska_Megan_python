@@ -66,8 +66,10 @@ def find_palindrome(ourfile):
     Parameters:
     ourfile - a file the user inputs
     
-    REsults:
-    Function returns
+    Results:
+    Function returns the line in the
+    file if the line is a palindrome 
+    
     """
     file = open(ourfile) #opens the file the user inputs
     for line in file.read().split("\n"): #reads the file line by line without 
@@ -75,7 +77,7 @@ def find_palindrome(ourfile):
         if is_palindrome(line): #uses the palindrome function to check if the
             print(line)          #words in the line are palindromes or not and 
                                 #prints the line if it is
-    #file.close() 
+    file.close() 
             
     
 #---------------------------------------------------------------------------
@@ -136,6 +138,7 @@ file = open(filename) #opens the file
 text = file.read.split() #reads the file and splits it into blanl
 char_freq(text) #uses the char_freq function to make a table 
 #close file?
+#return or print something?
 
 #----------------------------------------------------------------------------
 #Problem 4
@@ -160,17 +163,18 @@ def speak_ICAO(text, pauseletter, pauseword):
     Results:
     
     """
-    words = text.lower()
+    words = text.lower() #makes the words in the file all lowercase
     words = words.split() #make text lowercase and split the text
     for word in words:    #into individual words
               
         for letter in word:      #nest for loop to check for the letters in 
             if letter in ICAOdict:          
                 os.system("say " + ICAOdict[letter]) #says the icao letter using
-                time.sleep(pauseletter)          #the os.system functions
+                time.sleep(0.1)          #the os.system functions
                 
-                time.sleep(pauseword) #uses the imported time.sleep function to pause between
+                time.sleep(1) #uses the imported time.sleep function to pause between
                       #letters and words 
+speak_ICAO('My name is python')
 #------------------------------------------------------------------------------
 #Problem 5 
 import re
@@ -225,45 +229,50 @@ import re
 def avg_word_length(filepath):
     """
     The function avg_word_length takes a file and 
+    
     Parameters:
+    A file that the user uploads
     
     Results:
-    
+    The average length of a word in the file (say if this is list or string
+    or variable)
     ml2016
     """
-    file = open(filepath)
-    text = file.read().split()
+    file = open(filepath) #opens the input file
+    text = file.read().split() #reads the file and splits it into words
     
-    words = re.findall('\w+', file.read())
-    avgword = sum([len(word) for word in words]) / len(words)
+    words = re.findall('\w+', text) #finds all instances of 
+    avgword = sum([len(word) for word in words]) / len(words) #the average 
+    #formula using the length function. The sum of the words divided by the
+    #number of words in the document 
     return avgword
 
 #Ask him tomorrow how to do this without the regular expressions
 
 #Problem 8 
 #Guess the number game
-import random
-correctnum = random.randint(1, 20)
-print('Hello, what is your name?')
-name = input('Enter you name: ')
-print("Well, %s, I am thinking of a number between 1 and 20.") % name
+import random #imports the random generator thing (be more specific)
+correctnum = random.randint(1, 20) #generates a random integer between 1 and 20
+print('Hello, what is your name?') #prints this string
+name = input('Enter you name: ') #prompts the user to enter their name
+print("Well, %s, I am thinking of a number between 1 and 20.") % name #prints 
+                                                                #this message
+                                                            #say what % does?
+guesses = 0 #not 1? #initializes variable that keeps track of the guesses to 0
 
-
-
-guesses = 0 #not 1?
-
-while guess!= correctnum:
-    guess = int(input('Your guess(integer): '))
-    if guess > correctnum:
-        guesses = guesses + 1
-        print('Your guess is too high. Take a guess')
+while guess!= correctnum: #while guess is not correct loops through guesses
+    guess = int(input('Your guess(integer): '))#prompts user to enter a guess
+    if guess > correctnum: #if guess is bigger than correct interger 
+        guesses = guesses + 1 #add one to the list of guesses
+        print('Your guess is too high. Take a guess') #print this message
         
-    elif guess < correctnum:
-        guesses = guesses + 1
-        print('Your guess is too low. Take a guess')
+    elif guess < correctnum: #if guess is smaller than the correct number
+        guesses = guesses + 1 #add one to the list of guesses
+        print('Your guess is too low. Take a guess') #print this message
         
-    elif guess == correctnum:
-        guesses = guesses + 1
+    elif guess == correctnum: #if guess is correct
+        guesses = guesses + 1 #add one to number of guesses and print following
+        #message which shows how many guess it took 
         print('Good job %s! You guessed my number in %d guesses!') % name % guesses 
         
         
@@ -273,8 +282,69 @@ while guess!= correctnum:
 
 
 #Problem 10 (9 was not assigned)
+#Write a program with which one can 
+#play Lingo
+
+"""
+This procedure plays the game Lingo.
+Lingo is a game where there is a hidden word, 5 characters long.
+The player must guess the word. For each guess the player receives two clues.
+1. The characters that are fully correct and 
+2. The characters that are in the word but in the wrong position.
+"""
+#Need to deal with both hints 
+#Use square brackets for 1.
+#Use parantheses for 2.
+
+print('Welcome to lingo!')
+lingo = input('Enter the lingo: ') #Prompts the user to enter the hidden word
+                                   #since there is not a good way to generate
+                                   #a random word like how there is to generate
+stop = False   #initialize stop to false
+#so that something                      
+
+while stop == False: #we set up a while loop which runs as long as stop is False
+    word = input('Enter a 5-letter word: ') #prompts the user to enter their guess
+    char_lingo = list(lingo)            #convert lingo into char list
+    char_word = list(word)              #convert guess word into char list
+    if lingo == word:       #if the word matches with lingo, show lingo
+        print('Yes, the word is : '+lingo)
+        print('Congrats, you guessed it!')
+        break #this breaks our while loop which we do because the game is over
+   
+    for i in range(len(char_word)):     # iterates through the characters in 
+       if char_word[i] == char_lingo[i]:
+            hint1 = ('[',char_word[i],']')
+            char_word[i] = ''.join(hint1)
+            print(char_word[i]) 
+       elif char_word[i] in lingo:  #  
+            hint2 = ('(',char_word[i],')')
+            char_word[i] = ''.join(hint2)
+    clue = ''.join(char_word)
+print('Clue: ',clue)
+#--------------------------------------------------------------------------
 
 #Problem 11
+""" a program that given the name of a text 
+file is able to write its content with each sentence on a separate 
+line.
+"""
+#Make sure to address each of the rules (say how many there are)
+
+import re #we want to use regular expressions to complete this problem
+def sentence_splitter(filename):
+    """
+    The function sentence_splitter will take the name of a text file the user
+    uploads and write its contents with each sentence on a seperate line.
+    
+    Parameters:
+    filename - a file uploaded by the user
+    
+    Results:
+    Function will return a new file? or a new list of each sentence on a 
+    seperate line
+    """
+    
 
  
 
