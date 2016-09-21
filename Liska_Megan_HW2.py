@@ -150,8 +150,9 @@ ICAOdict = {'a':'alfa', 'b':'bravo', 'c':'charlie', 'd':'delta',
 'u':'uniform', 'v':'victor', 'w':'whiskey', 'x':'x-ray', 
 'y':'yankee', 'z':'zulu'} #
 
-import os #imports the os things
-import time #imports the time things (find specific word for these)
+import os #imports the os library which gives us the say function
+import time #imports the time library which gives us the functions to pause
+            #between letter and words
 
 def speak_ICAO(text, pauseletter, pauseword):
     """
@@ -159,6 +160,9 @@ def speak_ICAO(text, pauseletter, pauseword):
     spoken ICAO words with given pause time between words and letters
     
     Parameters:
+    text - a string of text the user wishes to be spoken
+    pauseletter - 
+    pauseword - 
     
     Results:
     
@@ -170,10 +174,10 @@ def speak_ICAO(text, pauseletter, pauseword):
         for letter in word:      #nest for loop to check for the letters in 
             if letter in ICAOdict:          
                 os.system("say " + ICAOdict[letter]) #says the icao letter using
-                time.sleep(0.1)          #the os.system functions
+                time.sleep(pausletter)          #the os.system functions
                 
-                time.sleep(1) #uses the imported time.sleep function to pause between
-                      #letters and words 
+                time.sleep(pauseword) #uses the imported time.sleep function 
+                                      #to pause between letters and words 
 speak_ICAO('My name is python')
 #------------------------------------------------------------------------------
 #Problem 5 
@@ -187,11 +191,12 @@ def hapaxfinder(filepath):
     filepath - a file uploaded by the user
     
     Results:
-    The function returnsa list of hapaxes
+    The function returns a list of hapaxes
     
     """
     #make sure to ignore capitalization (use .lower)
-    #need to split file into somethings, regular expressions will be helpful
+    #need to split file into individual letters, 
+    #regular expressions will be helpful
 
     file = open(filepath) #open our file
     text = file.read().lower() #we want to read the file and put it all into 
@@ -282,46 +287,55 @@ while guess!= correctnum: #while guess is not correct loops through guesses
 
 
 #Problem 10 (9 was not assigned)
-#Write a program with which one can 
-#play Lingo
+#Write a program with which one can play Lingo
 
 """
 This procedure plays the game Lingo.
 Lingo is a game where there is a hidden word, 5 characters long.
 The player must guess the word. For each guess the player receives two clues.
-1. The characters that are fully correct and 
-2. The characters that are in the word but in the wrong position.
+1. The characters that are fully correct, given in square brackets and 
+2. The characters that are in the word but in the wrong position, given in
+   parenthesis.
 """
 #Need to deal with both hints 
 #Use square brackets for 1.
 #Use parantheses for 2.
 
 print('Welcome to lingo!')
-lingo = input('Enter the lingo: ') #Prompts the user to enter the hidden word
+lingo = input('Enter the hidden word: ') #Prompts the user to enter the hidden word
                                    #since there is not a good way to generate
                                    #a random word like how there is to generate
 stop = False   #initialize stop to false
-#so that something                      
+                      
 
 while stop == False: #we set up a while loop which runs as long as stop is False
     word = input('Enter a 5-letter word: ') #prompts the user to enter their guess
-    char_lingo = list(lingo)            #convert lingo into char list
-    char_word = list(word)              #convert guess word into char list
+    char_lingo = list(lingo)  #convert lingo word and the guess word
+    char_word = list(word)   #into lists of characters            
     if lingo == word:       #if the word matches with lingo, show lingo
         print('Yes, the word is : '+lingo)
         print('Congrats, you guessed it!')
         break #this breaks our while loop which we do because the game is over
    
     for i in range(len(char_word)):     # iterates through the characters in 
-       if char_word[i] == char_lingo[i]:
-            hint1 = ('[',char_word[i],']')
-            char_word[i] = ''.join(hint1)
+                                       #the range of the length of the words
+       if char_word[i] == char_lingo[i]: #if the ith character in the guess 
+                                         #is the same as the ith character in 
+                                           #the lingo word
+            hint1 = ('[',char_word[i],']') #the hint will be the character in
+                                            #the ith spot in brackets
+            char_word[i] = ''.join(hint1) 
             print(char_word[i]) 
-       elif char_word[i] in lingo:  #  
-            hint2 = ('(',char_word[i],')')
+       
+       elif char_word[i] in lingo:  #the second condition checks for the second
+                                    #hint. If the ith character is in the 
+                                    #hidden word somewhere then
+            hint2 = ('(',char_word[i],')') #gives the ith character in 
+                                           #parenthesis
             char_word[i] = ''.join(hint2)
     clue = ''.join(char_word)
-print('Clue: ',clue)
+print('Clue: ',clue) #Prints the string Clue, followed by our clue variable we
+                     #made using the if/else statements.
 #--------------------------------------------------------------------------
 
 #Problem 11
