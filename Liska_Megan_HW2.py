@@ -21,16 +21,17 @@ def reverse(String):
     Results:
     Returns the reverse of the text string String
     """
-    endstr = len(String) -1  #set variable as string length minus 1?
+    endstr = len(String) -1  #set variable as string length minus 1
     revStr = '' #set variable as an empty string
-    for char in str: #iterate through the characters
+    for char in String: #iterate through the characters, work backwords to build
+                     #reverse string
         revStr = revStr + String[endstr] #
         endstr = endstr - 1
     return revStr
     
         
     
-def is_palindrome(inputword):
+def is_palindrome(input_word):
     """
     This function is_palindrome() that recognizes
     a palindrome
@@ -41,21 +42,24 @@ def is_palindrome(inputword):
     
     Results:
     Returns True if inputstring is a palindrome
+    Returns False if inputstring is not a palindrome
     
     ml2016
     """
     #use this for reference in our actual function
     palindrome = False #initialize variable to false
     
-    input_word = input_word.upper()
-    input_word = input_word.replace(" ", "")
+    input_word = input_word.upper() #makes the word all uppercase so words can
+                                    #be compared
+    input_word = input_word.replace(" ", "") #gets rid of white spaces 
     
-    if not input_word.isalpha: #if the input is blank return false
+    if not input_word.isalpha(): #if the input has numbers return false
         return palindrome
     
     if reverse(input_word) == input_word: #test if input word is the same 
-        palindrome == True                #forwards and backwards us
-                                          #reutrns true if input word is a
+        palindrome == True                #forwards and backwards using 
+                                          #reverse function 
+                                          #returns true if input word is a
     return palindrome                     #palindrome 
 
 def find_palindrome(ourfile):
@@ -130,15 +134,21 @@ def char_freq(text):
     for char in text: 
     #iterate through each character in our text
         result[char] = result.get(char, 0) + 1
-    return result 
+    keylist = list(result.keys())
+    keylist.sort()
+    for k in keylist :
+        print(k + ': ' + str(result[k]) + '\n')
+    
 
-
+filename = input('Enter filename')
 file = open(filename) #opens the file
 
-text = file.read.split() #reads the file and splits it into blanl
+text = file.read() #.split() #reads the file and splits it into blanl
 char_freq(text) #uses the char_freq function to make a table 
 #close file?
 #return or print something?
+
+
 
 #----------------------------------------------------------------------------
 #Problem 4
@@ -161,8 +171,8 @@ def speak_ICAO(text, pauseletter, pauseword):
     
     Parameters:
     text - a string of text the user wishes to be spoken
-    pauseletter - 
-    pauseword - 
+    pauseletter - a float indicating how long to pause between letters
+    pauseword - a float indicating how long to pause between words
     
     Results:
     
@@ -203,15 +213,15 @@ def hapaxfinder(filepath):
                                #lowercase words to ignore capitalization
     words = re.findall('\w+', text) #uses regular expression re.findall to
                                     #find all words in text
-    freqs = {key: 0 for key in words} 
+    freqs = {key: 0 for key in words} #makes a dictionary that will keep track
+                                      #of the times each word appears
+    for word in words: #loops through the word in our list of words in the text
+        freqs[word] += 1 #adds 1 to the frequency dictionary
     
-    for word in words:
-        freqs[word] += 1
-    
-    for word in freqs:
-        if freqs[word] == 1:
-        
-    print(word)
+    for word in freqs: #loops through the words in our dictionary
+        if freqs[word] == 1: #if the word only appears once. i.e has 1 for its
+                            #dictionary entry then print that word as it is a 
+    print(word)             #hapaxes
     
 
     
@@ -221,8 +231,20 @@ def hapaxfinder(filepath):
 #Write a program that given a text file will create a new text file in which 
 #all the lines from the original file are numbered from 
 #1 to n
+filename = input('Enter a file name')
 file = open(filename)
-text = file.read.split()
+text = file.read().splitlines()
+file.close()
+newtext = ''
+for number, line in enumerate(text) :
+    newline = str(number) + line
+    newtext = newtext + newline
+
+new_filename = input('Enter a new file name: ')
+new_file = open(new_filename, 'w')
+new_file.write(newtext)
+new_file.close()
+    
 
 
 #-----------------------------------------------------------------------------
@@ -252,7 +274,7 @@ def avg_word_length(filepath):
     #number of words in the document 
     return avgword
 
-#Ask him tomorrow how to do this without the regular expressions
+
 
 #Problem 8 
 #Guess the number game
