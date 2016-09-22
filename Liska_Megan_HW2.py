@@ -85,7 +85,7 @@ def find_palindrome(ourfile):
     for line in file.read().splitlines(): #reads the file line by line without 
                                          
         if is_palindrome(line): #uses the palindrome function to check if the
-            print(line)          #line is a  palindromes or not and 
+            print(line)          #line is a palindromes or not and 
                                 #prints the line if it is
     file.close() 
             
@@ -100,7 +100,9 @@ from the user and finds and prints all pairs of words that are
 semordnilaps to the screen. 
 """
 #since this is not a function need to let the user know to upload a file
-#otherwise when these lines of code are run they will (blank)
+#the question says that palindromes themselves are not semordnilaps so need to
+#make sure they are not found by the program
+
 filename = input("Enter filename: ") #has the user upload a file 
 file = open(filename)                
 
@@ -110,11 +112,11 @@ semordnilap_list= [] #sets our variable as an empty list the for loop will fill
 
 for word1 in text: #iterates through the words in the text         
         
-    #for word2 in text: #iterates again through the words in the text      
-    if word1[::-1] in text and word1[::-1] != word1: 
-        semordnilap_list.append(word1)#if word1 is the same as word 2 (backward thing)
-        
-print(semordnilap_list)    
+          
+    if word1[::-1] in text and word1[::-1] != word1: #if the reverse of the word
+        semordnilap_list.append(word1) #is in the text and the word is not a 
+                                      #palindrome, add the word to the list
+print(semordnilap_list)    #print the list of semordnilaps 
     
 file.close() #closes file
 
@@ -139,23 +141,23 @@ def char_freq(filename):
     #This time .get(x,0) will look through the dictionary for x and return 
     #0 if x is not found. 
     #Then add 1 so it will put a 1 in our result dictionary if x is found
-    #need to take care of the special characters 
+    
 
     file = open(filename) #opens the file
 
-    text = file.read() #.split() #reads the file and splits it into lines    
+    text = file.read() #reads the file and splits it into lines    
     file.close()    
     
     result = {} #sets our result as an empty dictionary.
                 #the function will fill
     
-    for char in text: 
-    #iterate through each character in our text
-        result[char] = result.get(char, 0) + 1
-    keylist = list(result.keys())
-    keylist.sort()
+    for char in text:  #iterate through each character in our text
+        result[char] = result.get(char, 0) + 1 #
+    keylist = list(result.keys()) #retrieved dictionary keys as a list and
+    keylist.sort() #sorted it 
     for k in keylist :
-        print(k + ': ' + str(result[k]) + '\n')
+        print(k + ': ' + str(result[k]) + '\n') #prints the results in 
+                                                #individual lines
     
 
 
@@ -194,7 +196,7 @@ def speak_ICAO(text, pauseletter, pauseword):
     for word in words:    #iterate through the words in the text
               
         for letter in word: #iterate through the letters in each word 
-            if letter in ICAOdict:    #the       
+            if letter in ICAOdict:    #if letter in ICAO dictionary        
                 os.system("say " + ICAOdict[letter]) #says the icao letter using
                 time.sleep(pauseletter)          #the os.system functions
                 
@@ -221,7 +223,7 @@ def hapaxfinder(filename):
     #regular expressions will be helpful
     
     file = open(filename) #open our file
-    text = file.read().lower() #we want to read the file and put it all into 
+    text = file.read().lower() #read the file and put it all into 
                                #lowercase words to ignore capitalization
     words = re.findall('\w+', text) #uses regular expression re.findall to
                                     #find all words in text
@@ -250,10 +252,12 @@ file = open(filename)
 text = file.read().splitlines() #read the file and splits it by line
 file.close() 
 newtext = '' #sets a new variable as an empty string the for loop will fill
-for number, line in enumerate(text) : #iterate throught the lines in blank
-    newline = str(number +1) + ' ' + line #makes number a string and adds it to line
-                                 #why?
-    newtext = newtext + newline + '\n' #adds newline to newtext variable
+for number, line in enumerate(text) : #iterate throught the lines in text
+#enumerate numbers each element    
+    newline = str(number +1) + ' ' + line #makes number a string and 
+                                            #adds it to line so now the lines
+                                             #are numbered 
+    newtext = newtext + newline + '\n' #adds newline to our string
 
 new_filename = input('Enter a new file name: ') #lets user name the new file
 new_file = open(new_filename, 'w') #opens the new file in write mode
@@ -282,12 +286,12 @@ def avg_word_length(filename):
     
     ml2016
     """
-    
+    #need to make sure that numbers and punctuation is not counted in the avg.
     file = open(filename) #opens the input file
     text = file.read() #reads the file
     
-    words = re.findall(r'\b[A-Za-z]+\b', text)
-    print(words)#finds all instances of 
+    words = re.findall(r'\b[A-Za-z]+\b', text) #finds all words in text
+     
     avgword = sum([len(word) for word in words]) / len(words) #the average 
     #formula using the length function. The sum of the words divided by the
     #number of words in the document 
@@ -305,10 +309,10 @@ and how many guesses it took to get them to the right number.
 """
 import random #imports the random library so a random number can be generated
 correctnum = random.randint(1, 20) #generates a random integer between 1 and 20
-print('Hello, what is your name?') #prints this string
+print('Hello, what is your name?') 
 name = input('Enter you name: ') #prompts the user to enter their name
-print("Well, %s, I am thinking of a number between 1 and 20." % name) #prints 
-                                                                #this message
+print("Well, %s, I am thinking of a number between 1 and 20." % name)  
+                                                                
 guess = 0   #intiates guess to 0 so the while loop will run. 0 is not in the
 #range so we know the loop will run intially.                                                 
 guesses = 0 #initializes variable that keeps track of the guesses to 0
@@ -358,7 +362,7 @@ while stop == False: #we set up a while loop which runs as long as stop is False
     if lingo == word:       #if the word matches with lingo, show lingo
         print('Yes, the word is : '+lingo)
         print('Congrats, you guessed it!')
-        break #this breaks our while loop which we do because the game is over
+        break #this breaks our while loop since the game is over
    
     for i in range(len(char_word)):     # iterates through the characters in 
                                        #the range of the length of the words
@@ -405,7 +409,7 @@ def sentence_splitter(filename):
     #Use re.sub which was utilized in the last homework
         
     with open(filename, 'r') as f: #this opens the file and reads it
-                                       #explain the with and as
+                                       
         file_content = f.read() #sets our variable as the contents of the file
         
         #now we go through the file and deal with each of the rules given in
@@ -415,7 +419,7 @@ def sentence_splitter(filename):
 
     sentence = re.sub(r'(?<!Mr)(?<!Mrs)(?<!Ms)(?<!Dr)\.\s([A-Z])', r'.\n\1', sentence)
     #Use re.sub to add a new line after a period. However, do not add the new
-    #line if the period is 
+    #line if the period is after honorifics 
 
     sentence = re.sub(r'!\s', '!\n', sentence) #use re.sub replace ! in the 
     #the text with ! and a new line. This adds a line after !
