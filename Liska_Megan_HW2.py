@@ -76,6 +76,7 @@ def find_palindrome(ourfile):
     file if the line is a palindrome 
     
     """
+    ourfile = input("Enter filename")
     file = open(ourfile) #opens the file the user inputs
     for line in file.read().split("\n"): #reads the file line by line without 
                                          #the n character at the end of lines
@@ -100,13 +101,16 @@ filename = input("Enter filename: ") #has the user upload a file
 file = open(filename)                
 
 text = file.read().split() #read the file and split into individual words    
-
+text = set(text) #removes duplicate elements
 semordnilap_list= [] #sets our variable as an empty list the for loop will fill        
 
 for word1 in text: #iterates through the words in the text         
-    for word2 in text: #iterates again through the words in the text      
-        if word1 == word2[::-1]: #if word1 is the same as word 2 (backward thing)
-            print(word1, word2)  #returns both words as a pair   
+        
+    #for word2 in text: #iterates again through the words in the text      
+    if word1[::-1] in text and word1[::-1] != word1: 
+        semordnilap_list.append(word1)#if word1 is the same as word 2 (backward thing)
+        
+print(semordnilap_list)    
     
 file.close() #closes file
 
@@ -199,7 +203,7 @@ speak_ICAO('My name is python',1,2) #test case
 #------------------------------------------------------------------------------
 #Problem 5 
 import re
-def hapaxfinder(filepath):
+def hapaxfinder(filename):
     """
     The function hapaxfinder() will return all the hapaxes found in the file
     that the user inputs.
@@ -214,8 +218,8 @@ def hapaxfinder(filepath):
     #make sure to ignore capitalization (use .lower)
     #need to split file into individual letters, 
     #regular expressions will be helpful
-
-    file = open(filepath) #open our file
+    
+    file = open(filename) #open our file
     text = file.read().lower() #we want to read the file and put it all into 
                                #lowercase words to ignore capitalization
     words = re.findall('\w+', text) #uses regular expression re.findall to
@@ -228,7 +232,7 @@ def hapaxfinder(filepath):
     for word in freqs: #loops through the words in our dictionary
         if freqs[word] == 1: #if the word only appears once. i.e has 1 for its
                             #dictionary entry then print that word as it is a 
-        print(word)             #hapaxes
+            print(word)             #hapaxes
     
 
     
@@ -246,9 +250,9 @@ text = file.read().splitlines() #read the file and splits it by line
 file.close() 
 newtext = '' #sets a new variable as an empty string the for loop will fill
 for number, line in enumerate(text) : #iterate throught the lines in blank
-    newline = str(number) + line #makes number a string and adds it to line
+    newline = str(number +1) + ' ' + line #makes number a string and adds it to line
                                  #why?
-    newtext = newtext + newline #adds newline to newtext variable
+    newtext = newtext + newline + '\n' #adds newline to newtext variable
 
 new_filename = input('Enter a new file name: ') #lets user name the new file
 new_file = open(new_filename, 'w') #opens the new file in write mode
@@ -263,9 +267,10 @@ new_file.close() #saves the file and closes it
 import re
 
 
-def avg_word_length(filepath):
+def avg_word_length(filename):
     """
-    The function avg_word_length takes a file and 
+    The function avg_word_length takes a file and finds the average length
+    of a word in the file 
     
     Parameters:
     A file that the user uploads
@@ -273,12 +278,15 @@ def avg_word_length(filepath):
     Results:
     The average length of a word in the file (say if this is list or string
     or variable)
+    
     ml2016
     """
-    file = open(filepath) #opens the input file
-    text = file.read().split() #reads the file and splits it into words
     
-    words = re.findall('\w+', text) #finds all instances of 
+    file = open(filename) #opens the input file
+    text = file.read() #reads the file
+    
+    words = re.findall(r'\b[A-Za-z]+\b', text)
+    print(words)#finds all instances of 
     avgword = sum([len(word) for word in words]) / len(words) #the average 
     #formula using the length function. The sum of the words divided by the
     #number of words in the document 
@@ -394,9 +402,10 @@ def sentence_splitter(filename):
     """
     #Make sure to address each of the rules (say how many there are)
     #Use re.sub which was utilized in the last homework
-    with open(file_name, 'r') as f: #this opens the file and reads it
+    filename = input("Enter filename: ")    
+    with open(filename, 'r') as f: #this opens the file and reads it
                                        #explain the with and as
-        file_contents = f.read() #sets our variable as the contents of the file
+        file_content = f.read() #sets our variable as the contents of the file
         
         #now we go through the file and deal with each of the rules given in
         #the problem 
