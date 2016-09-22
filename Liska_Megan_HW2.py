@@ -23,9 +23,10 @@ def reverse(String):
     """
     endstr = len(String) -1  #set variable as string length minus 1
     revStr = '' #set variable as an empty string
-    for char in String: #iterate through the characters, work backwords to build
-                     #reverse string
-        revStr = revStr + String[endstr] #
+    for char in String: #iterate through the characters, work backwords to
+                     # build the reverse string
+        revStr = revStr + String[endstr] #add the letters from input word 
+                                         #backwords to make the reverse word
         endstr = endstr - 1
     return revStr
     
@@ -57,7 +58,7 @@ def is_palindrome(input_word):
         return palindrome
     
     if reverse(input_word) == input_word: #test if input word is the same 
-        palindrome == True                #forwards and backwards using 
+        palindrome = True                #forwards and backwards using 
                                           #reverse function 
                                           #returns true if input word is a
     return palindrome                     #palindrome 
@@ -96,14 +97,14 @@ semordnilaps to the screen.
 #since this is not a function need to let the user know to upload a file
 #otherwise when these lines of code are run they will (blank)
 filename = input("Enter filename: ") #has the user upload a file 
-file = open(filename)                #puts the message on the screen 
+file = open(filename)                
 
 text = file.read().split() #read the file and split into individual words    
 
 semordnilap_list= [] #sets our variable as an empty list the for loop will fill        
 
 for word1 in text: #iterates through the words in the text         
-    for word2 in text: #iterates again through the words in the text (nested loop)     
+    for word2 in text: #iterates again through the words in the text      
         if word1 == word2[::-1]: #if word1 is the same as word 2 (backward thing)
             print(word1, word2)  #returns both words as a pair   
     
@@ -146,10 +147,10 @@ def char_freq(text):
 filename = input('Enter filename')
 file = open(filename) #opens the file
 
-text = file.read() #.split() #reads the file and splits it into blanl
+text = file.read() #.split() #reads the file and splits it into lines
 char_freq(text) #uses the char_freq function to make a table 
-#close file?
-#return or print something?
+#file.close()
+
 
 
 
@@ -178,20 +179,23 @@ def speak_ICAO(text, pauseletter, pauseword):
     pauseword - a float indicating how long to pause between words
     
     Results:
+    Function returns spoken ICAO letters for the letters in text. Function will
+    pause between each letter for length indicated by pauseletter and 
+    between each word for length indicated by pauseword.
     
     """
     words = text.lower() #makes the words in the file all lowercase
-    words = words.split() #make text lowercase and split the text
-    for word in words:    #into individual words
+    words = words.split() #make text lowercase and split into individual words
+    for word in words:    #iterate through the words in the text
               
-        for letter in word:      #nest for loop to check for the letters in 
-            if letter in ICAOdict:          
+        for letter in word: #iterate through the letters in each word 
+            if letter in ICAOdict:    #the       
                 os.system("say " + ICAOdict[letter]) #says the icao letter using
                 time.sleep(pauseletter)          #the os.system functions
                 
                 time.sleep(pauseword) #uses the imported time.sleep function 
                                       #to pause between letters and words 
-speak_ICAO('My name is python',2,1)
+speak_ICAO('My name is python',1,2) #test case
 #------------------------------------------------------------------------------
 #Problem 5 
 import re
@@ -231,9 +235,11 @@ def hapaxfinder(filepath):
 #----------------------------------------------------------------------------
 
 #Problem 6
-#Write a program that given a text file will create a new text file in which 
-#all the lines from the original file are numbered from 
-#1 to n
+"""
+This is a program that takes a text file and creates a new text file in which 
+all the lines from the original file are numbered from 
+1 to n
+"""
 filename = input('Enter a file name') #Prompts user to enter a filename
 file = open(filename) 
 text = file.read().splitlines() #read the file and splits it by line
