@@ -173,7 +173,7 @@ ICAOdict = {'a':'alfa', 'b':'bravo', 'c':'charlie', 'd':'delta',
 
 import os #imports the os library which gives us the say function
 import time #imports the time library which gives us the functions to pause
-            #between letter and words
+            #between letters and words
 
 def speak_ICAO(text, pauseletter, pauseword):
     """
@@ -281,8 +281,7 @@ def avg_word_length(filename):
     A file that the user uploads
     
     Results:
-    The average length of a word in the file (say if this is list or string
-    or variable)
+    The average length of a word in the file
     
     ml2016
     """
