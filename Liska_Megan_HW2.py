@@ -9,6 +9,10 @@ Created on Thu Sep 15 19:04:36 2016
 #Use the reference tip and create is_palindrome fucntio
 #First create reverse function to use in the is_palindrome
 #Use Is_palindrome in the palindrom recogniser function
+#The original problem asks us to print the line of the file to the screen
+#if it is a palindrome but not individual palindromes that are in the line
+#so I assumed that we are looking through the file line by line and not word
+#word 
 
 def reverse(String):
     """
@@ -65,8 +69,8 @@ def is_palindrome(input_word):
 
 def find_palindrome(ourfile):
     """
-    This function find_palindrome() takes a file from the user and points the 
-    line that has a palindrom/word better
+    This function find_palindrome() takes a file from the user and prints the 
+    line that is a palindrome
     
     Parameters:
     ourfile - a file the user inputs
@@ -76,12 +80,12 @@ def find_palindrome(ourfile):
     file if the line is a palindrome 
     
     """
-    ourfile = input("Enter filename")
+    
     file = open(ourfile) #opens the file the user inputs
-    for line in file.read().split("\n"): #reads the file line by line without 
-                                         #the n character at the end of lines
+    for line in file.read().splitlines(): #reads the file line by line without 
+                                         
         if is_palindrome(line): #uses the palindrome function to check if the
-            print(line)          #words in the line are palindromes or not and 
+            print(line)          #line is a  palindromes or not and 
                                 #prints the line if it is
     file.close() 
             
@@ -118,7 +122,7 @@ file.close() #closes file
 #Problem 3
 #use the function we made in HW one as it gives a frequency table for a string
 
-def char_freq(text):
+def char_freq(filename):
     """
     The function char_freq() takes a string and builds a frequency
     list of the characters contained in it
@@ -136,6 +140,12 @@ def char_freq(text):
     #0 if x is not found. 
     #Then add 1 so it will put a 1 in our result dictionary if x is found
     #need to take care of the special characters 
+
+    file = open(filename) #opens the file
+
+    text = file.read() #.split() #reads the file and splits it into lines    
+    file.close()    
+    
     result = {} #sets our result as an empty dictionary.
                 #the function will fill
     
@@ -147,15 +157,6 @@ def char_freq(text):
     for k in keylist :
         print(k + ': ' + str(result[k]) + '\n')
     
-
-filename = input('Enter filename')
-file = open(filename) #opens the file
-
-text = file.read() #.split() #reads the file and splits it into lines
-char_freq(text) #uses the char_freq function to make a table 
-#file.close()
-
-
 
 
 #----------------------------------------------------------------------------
@@ -397,12 +398,12 @@ def sentence_splitter(filename):
     filename - a file uploaded by the user
     
     Results:
-    Function will return a new file with each sentence on a seperate line
+    Function will print text with each sentence on a seperate line
     
     """
     #Make sure to address each of the rules (say how many there are)
     #Use re.sub which was utilized in the last homework
-    filename = input("Enter filename: ")    
+        
     with open(filename, 'r') as f: #this opens the file and reads it
                                        #explain the with and as
         file_content = f.read() #sets our variable as the contents of the file
