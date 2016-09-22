@@ -93,10 +93,12 @@ recogniser that accepts a file name
 from the user and finds and prints all pairs of words that are
 semordnilaps to the screen. 
 """
-filename = input("Enter filename: ") #has the user input a file 
+#since this is not a function need to let the user know to upload a file
+#otherwise when these lines of code are run they will (blank)
+filename = input("Enter filename: ") #has the user upload a file 
 file = open(filename)                #puts the message on the screen 
 
-text = file.read().split() #read the file and split into individual lines/words    
+text = file.read().split() #read the file and split into individual words    
 
 semordnilap_list= [] #sets our variable as an empty list the for loop will fill        
 
@@ -185,11 +187,11 @@ def speak_ICAO(text, pauseletter, pauseword):
         for letter in word:      #nest for loop to check for the letters in 
             if letter in ICAOdict:          
                 os.system("say " + ICAOdict[letter]) #says the icao letter using
-                time.sleep(pausletter)          #the os.system functions
+                time.sleep(pauseletter)          #the os.system functions
                 
                 time.sleep(pauseword) #uses the imported time.sleep function 
                                       #to pause between letters and words 
-speak_ICAO('My name is python')
+speak_ICAO('My name is python',2,1)
 #------------------------------------------------------------------------------
 #Problem 5 
 import re
@@ -222,7 +224,7 @@ def hapaxfinder(filepath):
     for word in freqs: #loops through the words in our dictionary
         if freqs[word] == 1: #if the word only appears once. i.e has 1 for its
                             #dictionary entry then print that word as it is a 
-    print(word)             #hapaxes
+        print(word)             #hapaxes
     
 
     
@@ -279,15 +281,22 @@ def avg_word_length(filepath):
 
 
 #Problem 8 
-#Guess the number game
-import random #imports the random generator thing (be more specific)
+
+"""
+This is a procedure which plays the guess the number game. The user guesses a
+number 1 to 20 and the game tells them if the number is too high or to low.
+Once the player guesses the correct number the game tells them they are right
+and how many guesses it took to get them to the right number.
+"""
+import random #imports the random library so a random number can be generated
 correctnum = random.randint(1, 20) #generates a random integer between 1 and 20
 print('Hello, what is your name?') #prints this string
 name = input('Enter you name: ') #prompts the user to enter their name
-print("Well, %s, I am thinking of a number between 1 and 20.") % name #prints 
+print("Well, %s, I am thinking of a number between 1 and 20." % name) #prints 
                                                                 #this message
-                                                            #say what % does?
-guesses = 0 #not 1? #initializes variable that keeps track of the guesses to 0
+guess = 0   #intiates guess to 0 so the while loop will run. 0 is not in the
+#range so we know the loop will run intially.                                                 
+guesses = 0 #initializes variable that keeps track of the guesses to 0
 
 while guess!= correctnum: #while guess is not correct loops through guesses
     guess = int(input('Your guess(integer): '))#prompts user to enter a guess
@@ -302,14 +311,9 @@ while guess!= correctnum: #while guess is not correct loops through guesses
     elif guess == correctnum: #if guess is correct
         guesses = guesses + 1 #add one to number of guesses and print following
         #message which shows how many guess it took 
-        print('Good job %s! You guessed my number in %d guesses!') % name % guesses 
+        print('Good job %s! You guessed my number in %d guesses!' % (name, guesses)) 
         
         
-
-
-
-
-
 #Problem 10 (9 was not assigned)
 #Write a program with which one can play Lingo
 
@@ -358,7 +362,7 @@ while stop == False: #we set up a while loop which runs as long as stop is False
                                            #parenthesis
             char_word[i] = ''.join(hint2)
     clue = ''.join(char_word)
-print('Clue: ',clue) #Prints the string Clue, followed by our clue variable we
+    print('Clue: ',clue) #Prints the string Clue, followed by our clue variable we
                      #made using the if/else statements.
 #--------------------------------------------------------------------------
 
