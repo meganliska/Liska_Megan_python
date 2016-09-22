@@ -297,7 +297,7 @@ def avg_word_length(filename):
     return avgword
 
 
-
+#-------------------------------------------------------------------------
 #Problem 8 
 
 """
@@ -331,7 +331,7 @@ while guess!= correctnum: #while guess is not correct loops through guesses
         #message which shows how many guess it took 
         print('Good job %s! You guessed my number in %d guesses!' % (name, guesses)) 
         
-        
+ #--------------------------------------------------------------------------       
 #Problem 10 (9 was not assigned)
 #Write a program with which one can play Lingo
 
