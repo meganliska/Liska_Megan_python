@@ -128,6 +128,7 @@ def char_freq(text):
     #This time .get(x,0) will look through the dictionary for x and return 
     #0 if x is not found. 
     #Then add 1 so it will put a 1 in our result dictionary if x is found
+    #need to take care of the special characters 
     result = {} #sets our result as an empty dictionary.
                 #the function will fill
     
@@ -231,19 +232,20 @@ def hapaxfinder(filepath):
 #Write a program that given a text file will create a new text file in which 
 #all the lines from the original file are numbered from 
 #1 to n
-filename = input('Enter a file name')
-file = open(filename)
-text = file.read().splitlines()
-file.close()
-newtext = ''
-for number, line in enumerate(text) :
-    newline = str(number) + line
-    newtext = newtext + newline
+filename = input('Enter a file name') #Prompts user to enter a filename
+file = open(filename) 
+text = file.read().splitlines() #read the file and splits it by line
+file.close() 
+newtext = '' #sets a new variable as an empty string the for loop will fill
+for number, line in enumerate(text) : #iterate throught the lines in blank
+    newline = str(number) + line #makes number a string and adds it to line
+                                 #why?
+    newtext = newtext + newline #adds newline to newtext variable
 
-new_filename = input('Enter a new file name: ')
-new_file = open(new_filename, 'w')
-new_file.write(newtext)
-new_file.close()
+new_filename = input('Enter a new file name: ') #lets user name the new file
+new_file = open(new_filename, 'w') #opens the new file in write mode
+new_file.write(newtext) #adds newtext to our file
+new_file.close() #saves the file and closes it 
     
 
 
@@ -365,7 +367,7 @@ print('Clue: ',clue) #Prints the string Clue, followed by our clue variable we
 file is able to write its content with each sentence on a separate 
 line.
 """
-#Make sure to address each of the rules (say how many there are)
+
 
 import re #we want to use regular expressions to complete this problem
 def sentence_splitter(filename):
@@ -377,9 +379,32 @@ def sentence_splitter(filename):
     filename - a file uploaded by the user
     
     Results:
-    Function will return a new file? or a new list of each sentence on a 
-    seperate line
+    Function will return a new file with each sentence on a seperate line
+    
     """
+    #Make sure to address each of the rules (say how many there are)
+    #Use re.sub which was utilized in the last homework
+    with open(file_name, 'r') as f: #this opens the file and reads it
+                                       #explain the with and as
+        file_contents = f.read() #sets our variable as the contents of the file
+        
+        #now we go through the file and deal with each of the rules given in
+        #the problem 
+    sentence = re.sub(r'\n', '', file_content) #first use re.sub to get rid of 
+    # all instances of spaces and lines in the file. 
+
+    sentence = re.sub(r'(?<!Mr)(?<!Mrs)(?<!Ms)(?<!Dr)\.\s([A-Z])', r'.\n\1', sentence)
+    #Use re.sub to add a new line after a period. However, do not add the new
+    #line if the period is 
+
+    sentence = re.sub(r'!\s', '!\n', sentence) #use re.sub replace ! in the 
+    #the text with ! and a new line. This adds a line after !
+
+    sentence = re.sub(r'\?\s', '?\n', sentence) #use re.sub to replace ? with
+    #? and a new line. This adds a new line after ?
+    print(sentence)
+
+
     
 
  
