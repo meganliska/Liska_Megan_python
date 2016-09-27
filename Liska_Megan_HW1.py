@@ -33,6 +33,8 @@ def translate(words):
                                            #words given in the problem.   
     result = '' #sets our result as an empty string the function will fill.
     
+    ## Prof G - Nice check on type to handle both cases. Good defensive
+    ## Prof G - programming.
     if type(words) == str: #this takes care of the case where the English
                            #we input into the function is a string
         words = words.split() #this splits the string into the individual words
@@ -123,6 +125,7 @@ def decoder(text):
     result = ''  #sets result as empty string the function will fill
 
     for char in text:  #iterate through the characters in input text
+    ## Prof G -should be able to directly index the dictionary key[char]
         new = key.get(char, char) #uses .get to match our input character with
                                   #its match in our dictionary
         result += new #sets our result as the corresponding character
@@ -166,7 +169,7 @@ def correct(InputString):
     
     return NewString #returns our result 
 
-InputString= 'This  is  very funny and cool.Indeed!'
+InputString= 'This  is    very funny   and cool.Indeed!'
 correct(InputString) #This tests the example given in the question.
 
 
@@ -530,5 +533,6 @@ def ourreduce(func, it):
         #iterates through x starting with the second position
         result = func(result, x) #makes our result the function applied to x
     return result
-print(ourreduce(min,[1, 20, -4, 111, 67]))#test case
+print(ourreduce(min,[1, 20, -4, 111, 67, -10, -250]))
+print(ourreduce(min,[[1, 20, -4], [111, 67], [-10, -250]]))#test case
         
