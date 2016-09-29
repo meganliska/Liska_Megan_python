@@ -37,9 +37,9 @@ dataset = pd.read_csv(irisdata, names = columns)
 #Question 2
 #Using Pandas, display the first ten and the last ten rows of the data.
 
-dataset.head(10) #displays the first 10 rows using panda method .head
+print(dataset.head(10)) #displays the first 10 rows using panda method .head
 
-dataset.tail(10) #displays the last 10 rows
+print(dataset.tail(10)) #displays the last 10 rows
 
 #-----------------------------------------------------------------------------
 
