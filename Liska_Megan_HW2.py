@@ -14,6 +14,9 @@ Created on Thu Sep 15 19:04:36 2016
 #so I assumed that we are looking through the file line by line and not word
 #word 
 
+##Prof G - Great way to break down the problem and abstract reusable pieces of
+##Prof G - code.
+
 def reverse(String):
     """
     This function reverse(String) takes a string and reverses
@@ -51,6 +54,10 @@ def is_palindrome(input_word):
     
     ml2016
     """
+    
+    ##Prof G - One thing you need to handle is punctuation. You should strip
+    ##Prof G - all white space and punctuation before checking palindrome!
+    
     #use this for reference in our actual function
     palindrome = False #initialize variable to false
     
@@ -99,6 +106,11 @@ recogniser that accepts a file name
 from the user and finds and prints all pairs of words that are
 semordnilaps to the screen. 
 """
+## Prof G - Palindromes are not necessarily semordnilap but could be, e.g.
+## Prof G - radar
+
+## Prof G - Why would you not write this as a funciton?
+
 #since this is not a function need to let the user know to upload a file
 #the question says that palindromes themselves are not semordnilaps so need to
 #make sure they are not found by the program
@@ -106,6 +118,7 @@ semordnilaps to the screen.
 filename = input("Enter filename: ") #has the user upload a file 
 file = open(filename)                
 
+## Prof G - Need to handle mixed case
 text = file.read().split() #read the file and split into individual words    
 text = set(text) #removes duplicate elements
 semordnilap_list= [] #sets our variable as an empty list the for loop will fill        
@@ -124,6 +137,7 @@ file.close() #closes file
 #Problem 3
 #use the function we made in HW one as it gives a frequency table for a string
 
+## Prof G - Need to update your function doc since the parameter is a filename
 def char_freq(filename):
     """
     The function char_freq() takes a string and builds a frequency
@@ -142,6 +156,10 @@ def char_freq(filename):
     #0 if x is not found. 
     #Then add 1 so it will put a 1 in our result dictionary if x is found
     
+    ## Prof G - Interesting, this counts characters, white space, and CR's.
+    ## Prof G - Did you intend to do that. If so, for non-printable 
+    ## Prof G - characters like CR, you might want to print the hex code
+    ## Prof G - associated with the character
 
     file = open(filename) #opens the file
 
@@ -200,9 +218,14 @@ def speak_ICAO(text, pauseletter, pauseword):
                 os.system("say " + ICAOdict[letter]) #says the icao letter using
                 time.sleep(pauseletter)          #the os.system functions
                 
+            ## Prof G - Could you have an else that says numbers?
+                
+                ## Prof G - This was indented to be inside the if statement,
+                ## Prof G - causing the pause between each letter to be
+                ## Prof G - pauseletter + pauseword. 
                 time.sleep(pauseword) #uses the imported time.sleep function 
                                       #to pause between letters and words 
-speak_ICAO('My name is python',1,2) #test case
+speak_ICAO('My name is python',0.25,2) #test case
 #------------------------------------------------------------------------------
 #Problem 5 
 import re
@@ -247,6 +270,13 @@ This is a program that takes a text file and creates a new text file in which
 all the lines from the original file are numbered from 
 1 to n
 """
+
+##Prof G - This should be a function?
+##Prof G - A nice addition would be to get the length of text and justify
+##Prof G - the lines so the beggining of the test is left justified
+##Prof G - e.g. for files with 10-99 lines, there would be one space before
+##Prof G - the numbers 1-9.
+
 filename = input('Enter a file name') #Prompts user to enter a filename
 file = open(filename) 
 text = file.read().splitlines() #read the file and splits it by line
@@ -306,6 +336,8 @@ number 1 to 20 and the game tells them if the number is too high or to low.
 Once the player guesses the correct number the game tells them they are right
 and how many guesses it took to get them to the right number.
 """
+
+##Prof G - This should be a function?
 import random #imports the random library so a random number can be generated
 correctnum = random.randint(1, 20) #generates a random integer between 1 and 20
 print('Hello, what is your name?') 
@@ -334,6 +366,9 @@ while guess!= correctnum: #while guess is not correct loops through guesses
  #--------------------------------------------------------------------------       
 #Problem 10 (9 was not assigned)
 #Write a program with which one can play Lingo
+        
+##Prof G - Nice work. Should be a function? The hidden word could be sent in
+##Prof G - as a parameter.
 
 """
 This procedure plays the game Lingo.
@@ -390,7 +425,7 @@ file is able to write its content with each sentence on a separate
 line.
 """
 
-
+##Prof G - This doesn't quite work on my test file.
 import re #we want to use regular expressions to complete this problem
 def sentence_splitter(filename):
     """
