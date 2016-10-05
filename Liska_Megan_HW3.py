@@ -86,6 +86,8 @@ plothistogram([10,50,100]) #test case
     
 
 #-----------------------------------------------------------------------------
+
+##Prof G - Great! Nice to include all of themin a single plot
 #Question 5 Plot a box plot for each of the numeric columns.
 import matplotlib.pyplot as plt #imports the matplot library which generates plots 
 plt.figure() #make a new plot 
